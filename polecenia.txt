@@ -1,0 +1,5 @@
+php artisan make:middleware Localization
+dodaje lokalizacje przy wyborze języka
+
+php artisan make:controller np. LocalizationControler
+dodawanie kontrolerów 
