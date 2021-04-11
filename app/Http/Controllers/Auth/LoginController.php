@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,11 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+
+    // dodać do funkcji logout
+    use AuthenticatesUsers{
+        logout as preformLogout;
+    }
 
     /**
      * Where to redirect users after login.
@@ -36,5 +41,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    //funkcja zwraca widok logowania po wylogowaniu się użytkowanika
+    public function logout(Request $request)
+    {
+        $this->preformLogout($request);
+        return redirect()->route('login');
     }
 }
