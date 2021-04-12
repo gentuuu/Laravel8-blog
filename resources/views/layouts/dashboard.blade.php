@@ -28,10 +28,10 @@
          <main>
             <div class="container-fluid">
                <h2 class="mt-2">
-                    @yield('breadcrumbs')   
+               @yield('title') 
                </h2>
                <!-- begin:breadcrumbs -->   
-                @yield('title')        
+               @yield('breadcrumbs')      
                <!-- end:breadcrumbs -->               
 
                <!-- begin:content -->     
