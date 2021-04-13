@@ -12,3 +12,12 @@ tworzenie seedera do uzupełnienia bazy przykladowymi danymi
 
 php artisan migrate:fresh --seed 
 dodanie przykladowych danych do tabeli
+
+php artisan make:model np. Category
+tworzenie modelu 
+
+php artisan make:controller np. CategoryController --resource --model= np. Category
+tworznie kontrolera 
+
+php artisan route:list --name=categories
+linki po nazwie
