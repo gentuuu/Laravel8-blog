@@ -6,3 +6,9 @@ dodawanie kontrolerów
 
 composer require diglactic/laravel-breadcrumbs
 dodanie breadcrumbs 
+
+php artisan make:seeder CategoryTableSeeder     
+tworzenie seedera do uzupełnienia bazy przykladowymi danymi
+
+php artisan migrate:fresh --seed 
+dodanie przykladowych danych do tabeli
