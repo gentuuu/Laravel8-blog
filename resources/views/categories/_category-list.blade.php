@@ -1,0 +1,26 @@
+@foreach ($categories as $category)
+    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0">
+    <label class="mt-auto mb-auto">
+        {{ str_repeat('-', $count). ' ' .$category->title }}
+    </label>
+    <div>
+        <!-- detail -->
+        <a href="#" class="btn btn-sm btn-primary" role="button">
+        <i class="fas fa-eye"></i>
+        </a>
+        <!-- edit -->
+        <a class="btn btn-sm btn-info" role="button">
+        <i class="fas fa-edit"></i>
+        </a>
+        <!-- delete -->
+        <form class="d-inline" action="" method="POST">
+        <button type="submit" class="btn btn-sm btn-danger">
+            <i class="fas fa-trash"></i>
+        </button>
+        </form>
+    </div>
+    @if ($category->descendants)
+        @include('categories._category-list', ['categories' => $category->descendants, 'count' => $count + 1])
+    @endif
+    </li>
+@endforeach

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    public function children(){
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function descendants(){
+        return $this->children()->with('descendants');
+    }
 }
