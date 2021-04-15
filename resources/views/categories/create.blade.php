@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    <!-- {{ Breadcrumbs::render('dashboard_home') }} -->
+    {{ Breadcrumbs::render('add_category') }}
 @endsection
 
 @section('content')
