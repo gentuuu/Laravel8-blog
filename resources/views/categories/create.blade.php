@@ -85,6 +85,14 @@
 
 @push('javascript-internal')
    <script>
+
+      function generateSlug(value){
+         return value.trim()
+            .toLowerCase()
+            .replace(/[^a-z\d-]/gi, '-')
+            .replace(/-+/g, '-').replace(/^-|-$/g, "");
+      } 
+
       $(function() {
          $('#select_category_parent').select2({
             theme: 'bootstrap4',
@@ -106,6 +114,19 @@
                }
             }
          });
+
+         $('#input_category_title').change(function(){
+            let title = $(this).val();
+            let parent_category = $('#select_category_paren').val() ?? "";
+            $('#input_category_slug').val(generateSlug(title + parent_category));
+         });
+
+         $('#select_category_parent').change(function(){
+            let title = $('#input_category_title').val();
+            let parent_category = $(this).val() ?? "";
+            $('#input_category_slug').val(generateSlug(title + " " + parent_category));
+         });
+
       });
    </script>
 @endpush

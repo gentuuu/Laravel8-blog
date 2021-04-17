@@ -21,3 +21,16 @@ tworznie kontrolera
 
 php artisan route:list --name=categories
 linki po nazwie
+
+funkcja generyje slug link
+function generateSlug(value){
+    return value.trim()
+        .toLowerCase()
+        .replace(/[^a-z\d-]/gi, '-')
+        .replace(/-+/g, '-').replace(/^-|-$/g, "");
+} 
+
+$('klasa or id').change(function(){
+    let title = $(this).val();
+    $('klasa or id').val(generateSlug(title));
+});
