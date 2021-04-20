@@ -37,13 +37,16 @@
                    </label>
                    <div class="input-group">
                       <div class="input-group-prepend">
-                         <button id="button_category_thumbnail" data-input="input_category_thumbnail" class="btn btn-primary" type="button">
+                         <button id="button_category_thumbnail" data-preview="holder" data-input="input_category_thumbnail" class="btn btn-primary" type="button">
                          {{ trans('categories.button.browse.value') }}
                          </button>
                       </div>
                       <input id="input_category_thumbnail" name="thumbnail" value="" type="text" class="form-control" placeholder="  {{ trans('categories.form_control.input.thumbnail.placeholder') }}"
                          readonly />
                    </div>
+                </div>
+                <div id="holder">
+                  
                 </div>
                 <!-- parent_category -->
                 <div class="form-group">
@@ -81,6 +84,10 @@
 @push('javascript-external')
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/i18n/' . app()->getLocale() . '.js') }}"></script>
+
+<!-- plik js file menager -->
+<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+
 @endpush
 
 @push('javascript-internal')
@@ -127,6 +134,9 @@
             $('#input_category_slug').val(generateSlug(title + " " + parent_category));
          });
 
+         // file manager
+         $('#button_category_thumbnail').filemanager('image');
+         // $('#button_category_thumbnail').filemanager('file');
       });
    </script>
 @endpush
