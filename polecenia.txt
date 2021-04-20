@@ -34,3 +34,6 @@ $('klasa or id').change(function(){
     let title = $(this).val();
     $('klasa or id').val(generateSlug(title));
 });
+
+https://unisharp.github.io/laravel-filemanager/installation
+file manager
