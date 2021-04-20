@@ -13,22 +13,33 @@
     <div class="col-md-12">
        <div class="card">
           <div class="card-body">
-             <form action="" method="POST">
+             <form action="{{ route('categories.store') }}" method="POST">
+             @csrf
                 <!-- title -->
                 <div class="form-group">
                    <label for="input_category_title" class="font-weight-bold">
                       {{ trans('categories.form_control.input.title.label') }}
                    </label>
-                   <input id="input_category_title" value="" name="title" type="text" class="form-control"
+                   <input id="input_category_title" value="" name="title" type="text" class="form-control @error('title') is-invalid @enderror"
                    placeholder="{{ trans('categories.form_control.input.title.placeholder') }}" />
+                     @error('title')
+                     <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror
                 </div>
                 <!-- slug -->
                 <div class="form-group">
                    <label for="input_category_slug" class="font-weight-bold">
                    {{ trans('categories.form_control.input.slug.label') }}
                    </label>
-                   <input id="input_category_slug" value="" name="slug" type="text" class="form-control"
+                   <input id="input_category_slug" value="" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                    placeholder="{{ trans('categories.form_control.input.slug.placeholder') }}" readonly />
+                     @error('slug')
+                     <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror
                 </div>
                 <!-- thumbnail -->
                 <div class="form-group">
@@ -41,8 +52,14 @@
                          {{ trans('categories.button.browse.value') }}
                          </button>
                       </div>
-                      <input id="input_category_thumbnail" name="thumbnail" value="" type="text" class="form-control" placeholder="  {{ trans('categories.form_control.input.thumbnail.placeholder') }}"
+                      <input id="input_category_thumbnail" name="thumbnail" value="" type="text" 
+                      class="form-control @error('thumbnail') is-invalid @enderror" placeholder="  {{ trans('categories.form_control.input.thumbnail.placeholder') }}"
                          readonly />
+                           @error('thumbnail')
+                           <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
                    </div>
                 </div>
                 <div id="holder">
@@ -63,7 +80,13 @@
                    {{ trans('categories.form_control.textarea.description.label') }}
                    </label>
                    <textarea id="input_category_description" name="description"
-                   placeholder="{{ trans('categories.form_control.textarea.description.placeholder') }}" class="form-control" rows="3"></textarea>
+                   placeholder="{{ trans('categories.form_control.textarea.description.placeholder') }}" 
+                   class="form-control @error('description') is-invalid @enderror" rows="3"></textarea>
+                   @error('description')
+                  <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
                 </div>
                 <div class="float-right">
                 	<a class="btn btn-primary px-4" href="{{ route('categories.index') }}">{{ trans('categories.button.back.value') }}</a>
