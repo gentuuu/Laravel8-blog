@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+
 class CategoryController extends Controller
 {
     /**
@@ -48,12 +49,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|strimg|max:60', 
-            'slug' => 'required|string|unigue:categories, slug', 
+            'title' => 'required|string|max:60', 
+            'slug' => 'required|string|unique:categories,slug', 
             'thumbnail' => 'required', 
             'description' => 'required|string|max:240', 
         ]);
+
     }
+
+ 
 
     /**
      * Display the specified resource.
