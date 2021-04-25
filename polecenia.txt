@@ -37,3 +37,7 @@ $('klasa or id').change(function(){
 
 https://unisharp.github.io/laravel-filemanager/installation
 file manager
+
+
+   dd($request->thumbnail,parse_url($request->thumbnail)['path']);
+wyświetlanie linku obrazka na liste po /
