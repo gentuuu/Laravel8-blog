@@ -41,3 +41,7 @@ file manager
 
    dd($request->thumbnail,parse_url($request->thumbnail)['path']);
 wyświetlanie linku obrazka na liste po /
+
+
+https://realrashid.github.io/sweet-alert/config
+alerty powiadomienia modul
