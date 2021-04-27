@@ -125,7 +125,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+    
+        return view('categories.edit', compact('category'));
     }
 
     /**

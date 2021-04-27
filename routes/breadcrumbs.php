@@ -20,6 +20,18 @@ Breadcrumbs::for('add_category', function ($trail) {
     $trail->push('Add', route('categories.create'));
 });
 
+Breadcrumbs::for('edit_category', function ($trail, $category) {
+    $trail->parent('categories');
+    $trail->push('Edit', route('categories.edit', ['category' => $category]));
+});
+
+Breadcrumbs::for('edit_category_title', function ($trail, $category) {
+    $trail->parent('edit_category',  $category);
+    $trail->push($category->title, route('categories.edit', ['category' => $category]));
+});
+
+
+
 
 // // Home > About
 // Breadcrumbs::for('about', function ($trail) {
