@@ -20,7 +20,7 @@
                    <label for="input_category_title" class="font-weight-bold">
                       {{ trans('categories.form_control.input.title.label') }}
                    </label>
-                   <input id="input_category_title" value="{{ old('title') }}" name="title" type="text" class="form-control @error('title') is-invalid @enderror"
+                   <input id="input_category_title" value="{{ old('title', $category->title) }}" name="title" type="text" class="form-control @error('title') is-invalid @enderror"
                    placeholder="{{ trans('categories.form_control.input.title.placeholder') }}" />
                      @error('title')
                      <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                    <label for="input_category_slug" class="font-weight-bold">
                    {{ trans('categories.form_control.input.slug.label') }}
                    </label>
-                   <input id="input_category_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
+                   <input id="input_category_slug" value="{{ old('slug', $category->slug ) }}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                    placeholder="{{ trans('categories.form_control.input.slug.placeholder') }}" readonly />
                      @error('slug')
                      <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                          {{ trans('categories.button.browse.value') }}
                          </button>
                       </div>
-                      <input id="input_category_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text" 
+                      <input id="input_category_thumbnail" name="thumbnail" value="{{ old('thumbnail', asset($category->thumbnail)) }}" type="text" 
                       class="form-control @error('thumbnail') is-invalid @enderror" placeholder="  {{ trans('categories.form_control.input.thumbnail.placeholder') }}"
                          readonly />
                            @error('thumbnail')
@@ -72,8 +72,8 @@
                    </label>
                    <select id="select_category_parent" name="parent_category"
                     data-placeholder="  {{ trans('categories.form_control.select.parent_category.placeholder') }}" class="custom-select w-100">
-                   @if(old('parent_category'))
-                     <option value="{{ old('parent_category')->id }}" selected>{{ old('parent_category')->title }}</option>
+                   @if(old('parent_category', $category->parent))
+                     <option value="{{ old('parent_category', $category->parent)->id }}" selected>{{ old('parent_category', $category->parent)->title }}</option>
                    @endif
                    </select>
                 </div>
@@ -84,7 +84,7 @@
                    </label>
                    <textarea id="input_category_description" name="description"
                    placeholder="{{ trans('categories.form_control.textarea.description.placeholder') }}" 
-                   class="form-control @error('description') is-invalid @enderror" rows="3">{{ old('description') }}</textarea>
+                   class="form-control @error('description') is-invalid @enderror" rows="3">{{ old('description', $category->description) }}</textarea>
                    @error('description')
                   <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

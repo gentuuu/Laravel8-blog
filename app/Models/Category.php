@@ -16,6 +16,10 @@ class Category extends Model
         return $query->whereNull('parent_id');
     }
 
+    public function parent(){
+        return $this->belongsTo(self::class);
+    }
+
     public function children(){
         return $this->hasMany(self::class, 'parent_id');
     }
