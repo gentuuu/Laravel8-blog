@@ -87,7 +87,7 @@ class CategoryController extends Controller
                 $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
             }
             Alert::error( trans('categories.alert.create.title'), trans('categories.alert.create.message.error', ['error' => $th->getMessage()]) );
-            return redirect()->back()->withInput($request->all())->withErrors($validator);    
+            return redirect()->back()->withInput($request->all());    
         }
        
         // dd("asdasd",$request->all());
@@ -158,7 +158,25 @@ class CategoryController extends Controller
             }
             return redirect()->back()->withInput($request->all())->withErrors($validator);    
         }
-        dd($request->all(),$category);
+
+         // proces validacji update kategorii 
+         try{
+            $category->update([
+                'title' => $request->title, 
+                'slug' => $request->slug, 
+                'thumbnail' => $request->thumbnail, 
+                'description'=> $request->description,
+                'parent_id'=> $request->parent_category
+            ]);
+            Alert::success( trans('categories.alert.update.title'), trans('categories.alert.update.message.success') );
+            return redirect()->route('categories.index');
+        } catch (\Throwable $th){
+            if($request->has('parent_category')){
+                $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
+            }
+            Alert::error( trans('categories.alert.update.title'), trans('categories.alert.update.message.error', ['error' => $th->getMessage()]) );
+            return redirect()->back()->withInput($request->all());    
+        }
 
     }
 
