@@ -13,6 +13,7 @@
     <!-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}"> -->
     <link rel="stylesheet" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css')}}">
     @stack('css-external')
+    @stack('css-internal')
 </head>
 
 <body>

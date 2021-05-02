@@ -30,6 +30,18 @@ Breadcrumbs::for('edit_category_title', function ($trail, $category) {
     $trail->push($category->title, route('categories.edit', ['category' => $category]));
 });
 
+Breadcrumbs::for('detail_category', function ($trail, $category) {
+    $trail->parent('categories');
+    $trail->push('Detail', route('categories.show', ['category' => $category]));
+});
+
+Breadcrumbs::for('detail_category_title', function ($trail, $category) {
+    $trail->parent('detail_category',  $category);
+    $trail->push($category->title, route('categories.show', ['category' => $category]));
+});
+
+
+
 
 
 
