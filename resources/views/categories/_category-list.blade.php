@@ -13,7 +13,13 @@
         <i class="fas fa-edit"></i>
         </a>
         <!-- delete -->
-        <form class="d-inline" action="" method="POST">
+        <form class="d-inline" action="{{ route('categories.destroy', ['category' => $category]) }}" role="alert" method="POST" 
+        alert-title="{{ trans('categories.alert.delete.title') }}" 
+        alert-text="{{ trans('categories.alert.delete.message.confirm',['title' => $category->title]) }}" 
+        alert-btn-cancel="{{ trans('categories.button.cancel.value') }}" 
+        alert-btn-yes="{{ trans('categories.button.delete.value') }}">
+        @csrf
+        @method('DELETE')
         <button type="submit" class="btn btn-sm btn-danger">
             <i class="fas fa-trash"></i>
         </button>
