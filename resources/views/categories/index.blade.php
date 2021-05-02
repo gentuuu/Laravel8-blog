@@ -40,7 +40,15 @@
          </div>
          <div class="card-body">
             <ul class="list-group list-group-flush">
-               @include('categories._category-list', ['categories' => $categories, 'count' => 0])
+               @if(count($categories))
+                  @include('categories._category-list', ['categories' => $categories, 'count' => 0])
+               @else
+                  @if (request()->get('keyword'))
+                     {{ trans('categories.label.no_data.search', ['keyword' => request()->get('keyword')]) }}
+                  @else
+                     {{ trans('categories.label.no_data.fetch') }}
+                  @endif
+               @endif
             </ul>
          </div>
       </div>
