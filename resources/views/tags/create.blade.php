@@ -1,0 +1,60 @@
+@extends('layouts.dashboard')
+
+@section('title')
+    {{ trans('tags.title.create') }}
+@endsection
+
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('add_tags') }}
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+       <div class="card">
+          <div class="card-body">
+             <form action="" method="POST">
+                <!-- title -->
+                <div class="form-group">
+                   <label for="input_tag_title" class="font-weight-bold">
+                      {{ trans('tags.form_control.input.title.label')}}
+                   </label>
+                   <input id="input_tag_title" value="" name="title" type="text"
+                      class="form-control"
+                      placeholder="{{ trans('tags.form_control.input.title.placeholder')}}" />
+                </div>
+                <!-- slug -->
+                <div class="form-group">
+                   <label for="input_tag_slug" class="font-weight-bold">
+                    {{ trans('tags.form_control.input.slug.label')}}
+                   </label>
+                   <input id="input_tag_slug" value="" name="slug" type="text"
+                      class="form-control"
+                      placeholder="{{ trans('tags.form_control.input.slug.placeholder')}}" readonly />
+                </div>
+                <button type="submit" class="btn btn-primary float-right px-4">
+                    {{ trans('tags.button.save.value')}}
+                </button>
+             </form>
+          </div>
+       </div>
+    </div>
+</div>
+@endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function() {
+            const generateSlug = (value) => {
+            return value.trim()
+                .toLowerCase()
+                .replace(/[^a-z\d-]/gi, '-')
+                .replace(/-+/g, '-').replace(/^-|-$/g, "")
+            }
+
+            $("#input_tag_title").change(function(even){
+                $('#input_tag_slug').val(generateSlug(even.target.value))
+            });
+        });
+    </script>
+@endpush
