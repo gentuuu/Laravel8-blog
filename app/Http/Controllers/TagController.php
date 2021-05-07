@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TagController extends Controller
 {
@@ -38,14 +39,32 @@ class TagController extends Controller
     public function store(Request $request)
     {
         Validator::make(
-        $request->all(),
-        [
-            'title' => 'required|string|max:25',
-            'slug' => 'required|string|unique:tags,slug',
-        ],
-        [],
-        $this->getAttributes()
-    )->validate();
+            $request->all(),
+            [
+                'title' => 'required|string|max:25',
+                'slug' => 'required|string|unique:tags,slug',
+            ],
+            [],
+            $this->getAttributes()
+        )->validate();
+
+        try{
+            Tag::create([
+                'title' => $request->title,
+                'slug' => $request->slug
+            ]);
+            Alert::success(
+                trans('tags.alert.create.title'),
+                trans('tags.alert.create.message.success')
+            );
+            return redirect()->route('tags.index');
+        } catch(\Throwable $th){
+            Alert::success(
+                trans('tags.alert.create.title'),
+                trans('tags.alert.create.message.error', ['error' => $th->getMessage()])
+            );
+            return redirect()->back()->withInput($request->all());
+        }
 
     }
 
