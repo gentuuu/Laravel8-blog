@@ -13,9 +13,11 @@
     <div class="col-md-12">
        <div class="card">
           <div class="card-body">
-             <form action="{{ route('tags.store') }}" method="POST">
+             <form action="{{ route('tags.update', ['tag' =>$tag]) }}" method="POST">
                 @csrf
-                <!-- title -->
+                @method('PUT')
+
+           <!-- title -->
                 <div class="form-group">
                    <label for="input_tag_title" class="font-weight-bold">
                       {{ trans('tags.form_control.input.title.label')}}
