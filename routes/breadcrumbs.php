@@ -56,6 +56,11 @@ Breadcrumbs::for('edit_tags', function ($trail, $tag) {
     $trail->push($tag->title, route('tags.edit',['tag'=>$tag]));
 });
 
+Breadcrumbs::for('posts', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Posts', route('posts.index'));
+});
+
 
 
 

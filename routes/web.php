@@ -36,6 +36,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], functio
 
     Route::resource('/tags', App\Http\Controllers\TagController::class)->except(['show']);
 
+    Route::resource('/posts', App\Http\Controllers\PostController::class);
+
     Route::group(['prefix' => 'filemanager'], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
