@@ -61,6 +61,11 @@ Breadcrumbs::for('posts', function ($trail) {
     $trail->push('Posts', route('posts.index'));
 });
 
+Breadcrumbs::for('add_post', function ($trail) {
+    $trail->parent('posts');
+    $trail->push('Add', route('posts.create'));
+});
+
 
 
 
