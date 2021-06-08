@@ -11,26 +11,42 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-       <form action="POST">
+       <form action="{{ route('posts.store') }}" method="POST">
+         @csrf
           <div class="card">
              <div class="card-body">
                 <div class="row d-flex align-items-stretch">
                    <div class="col-md-8">
                       <!-- title -->
                       <div class="form-group">
-                         <label for="input_post_title" class="font-weight-bold">
-                            {{ trans('posts.form_control.input.title.label') }}
-                         </label>
-                         <input id="input_post_title" value="" name="title" type="text" class="form-control"
-                            placeholder="{{ trans('posts.form_control.input.title.placeholder') }}" />
+                           <label for="input_post_title" class="font-weight-bold">
+                              {{ trans('posts.form_control.input.title.label') }}
+                           </label>
+                           <input id="input_post_title" value="" name="title" type="text"
+                              class="form-control  @error('title') is-invalid @enderror"
+                              placeholder="{{ trans('posts.form_control.input.title.placeholder') }}" />
+                           @error('title')
+                              <span class="invalid-feedback">
+                                 <strong>
+                                    {{ $message }}
+                                 </strong>
+                              </span>
+                           @enderror
                       </div>
                       <!-- slug -->
                       <div class="form-group">
                          <label for="input_post_slug" class="font-weight-bold">
                             {{ trans('posts.form_control.input.slug.label') }}
                          </label>
-                         <input id="input_post_slug" value="" name="slug" type="text" class="form-control" placeholder="{{ trans('posts.form_control.input.slug.placeholder') }}"
-                            readonly />
+                         <input id="input_post_slug" value="" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" 
+                         placeholder="{{ trans('posts.form_control.input.slug.placeholder') }}" readonly />
+                           @error('slug')
+                              <span class="invalid-feedback">
+                                 <strong>
+                                    {{ $message }}
+                                 </strong>
+                              </span>
+                           @enderror
                       </div>
                       <!-- thumbnail -->
                       <div class="form-group">
@@ -44,8 +60,15 @@
                                   {{ trans('posts.button.browse.value') }}
                                </button>
                             </div>
-                            <input id="input_post_thumbnail" name="thumbnail" value="" type="text" class="form-control"
+                            <input id="input_post_thumbnail" name="thumbnail" value="" type="text" class="form-control @error('thumbnail') is-invalid @enderror"
                                placeholder="{{ trans('posts.form_control.input.thumbnail.placeholder') }}" readonly />
+                                 @error('thumbnail')
+                                    <span class="invalid-feedback">
+                                       <strong>
+                                          {{ $message }}
+                                       </strong>
+                                    </span>
+                                 @enderror
                          </div>
                       </div>
                       <!-- description -->
@@ -53,16 +76,32 @@
                          <label for="input_post_description" class="font-weight-bold">
                             {{ trans('posts.form_control.textarea.description.label') }}
                          </label>
-                         <textarea id="input_post_description" name="description" placeholder="{{ trans('posts.form_control.textarea.description.placeholder') }}" class="form-control "
-                            rows="3"></textarea>
+                         <textarea id="input_post_description" name="description" placeholder="{{ trans('posts.form_control.textarea.description.placeholder') }}" 
+                           class="form-control @error('description') is-invalid @enderror"
+                           rows="3"></textarea>
+                           @error('description')
+                              <span class="invalid-feedback">
+                                 <strong>
+                                    {{ $message }}
+                                 </strong>
+                              </span>
+                           @enderror
                       </div>
                       <!-- content -->
                       <div class="form-group">
                          <label for="input_post_content" class="font-weight-bold">
                             {{ trans('posts.form_control.textarea.content.label') }}
                          </label>
-                         <textarea id="input_post_content" name="content" placeholder="{{ trans('posts.form_control.textarea.content.placeholder') }}" class="form-control "
+                         <textarea id="input_post_content" name="content" placeholder="{{ trans('posts.form_control.textarea.content.placeholder') }}" 
+                         class="form-control @error('content') is-invalid @enderror"
                             rows="20"></textarea>
+                           @error('content')
+                              <span class="invalid-feedback">
+                                 <strong>
+                                    {{ $message }}
+                                 </strong>
+                              </span>
+                           @enderror
                       </div>
                    </div>
                    <div class="col-md-4">
@@ -71,13 +110,20 @@
                          <label for="input_post_description" class="font-weight-bold">
                             {{ trans('posts.form_control.input.category.label') }}
                          </label>
-                         <div class="form-control overflow-auto" style="height: 886px">
+                         <div class="form-control overflow-auto @error('category') is-invalid @enderror" style="height: 886px">
                             <!-- List category -->
                             @include('posts._category-list', [
                                 'categories' => $categories
                             ])
                             <!-- List category -->
                          </div>
+                        @error('category')
+                           <span class="invalid-feedback">
+                              <strong>
+                                 {{ $message }}
+                              </strong>
+                           </span>
+                        @enderror
                       </div>
                    </div>
                 </div>
@@ -88,20 +134,35 @@
                          <label for="select_post_tag" class="font-weight-bold">
                             {{ trans('posts.form_control.select.tag.label') }}
                          </label>
-                         <select id="select_post_tag" name="tag" data-placeholder="{{ trans('posts.form_control.select.tag.placeholder') }}" class="custom-select w-100"
+                         <select id="select_post_tag" name="tag" data-placeholder="{{ trans('posts.form_control.select.tag.placeholder') }}"
+                         class="custom-select w-100 @error('tag') is-invalid @enderror"
                             multiple>
                          </select>
+                        @error('tag')
+                           <span class="invalid-feedback">
+                              <strong>
+                                 {{ $message }}
+                              </strong>
+                           </span>
+                        @enderror
                       </div>
                       <!-- status -->
                       <div class="form-group">
                          <label for="select_post_status" class="font-weight-bold">
                             {{ trans('posts.form_control.select.status.label') }}
                          </label>
-                         <select id="select_post_status" name="status" class="custom-select">
+                         <select id="select_post_status" name="status" class="custom-select @error('status') is-invalid @enderror">
                               @foreach ($statuses as $item => $value)
                                  <option value="{{ $item }}">{{ $value }}</option>
                               @endforeach
                          </select>
+                        @error('status')
+                           <span class="invalid-feedback">
+                              <strong>
+                                 {{ $message }}
+                              </strong>
+                           </span>
+                        @enderror
                       </div>
                    </div>
                 </div>
