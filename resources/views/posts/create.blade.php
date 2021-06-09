@@ -138,7 +138,7 @@
                          class="custom-select w-100 @error('tag') is-invalid @enderror"
                             multiple>
                             @if (old('tag'))
-                                @foreach (old('tag') as $item)
+                                @foreach (old('tag') as $tag)
                                     <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
                                 @endforeach
                             @endif
