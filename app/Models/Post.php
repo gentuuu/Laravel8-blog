@@ -25,4 +25,12 @@ class Post extends Model
     public function categories(){
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
+
+    public function scopePublish($query){
+        return $query->where('status', "publish");
+    }
+
+    public function scopeDraft($query){
+        return $query->where('status', "draft");
+    }
 }
