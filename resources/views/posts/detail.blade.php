@@ -56,7 +56,7 @@
                 
 
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="btn btn-primary mx-1" role="button">
+                    <a href="{{ route('posts.index') }}" class="btn btn-primary mx-1" role="button">
                         Back
                     </a>
                 </div>
