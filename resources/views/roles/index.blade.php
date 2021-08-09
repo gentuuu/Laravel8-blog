@@ -44,6 +44,9 @@
                             {{ $item->name }}
                         </label>
                         <div>
+                            <a href="{{ route('roles.show', ['role' => $item]) }}" class="btn btn-sm btn-primary" role="button">
+                                <i class="fas fa-eye"></i>
+                            </a>
                             <!-- edit -->
                             <a class="btn btn-sm btn-info" role="button">
                                 <i class="fas fa-edit"></i>
