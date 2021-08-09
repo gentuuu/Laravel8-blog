@@ -38,25 +38,33 @@
           <div class="card-body">
              <ul class="list-group list-group-flush">
                 <!-- list role -->
- 
-                   <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0">
-                      <label class="mt-auto mb-auto">
-                         <!-- Role name -->   
-                         </label>
-                         <div>
+                @forelse ($roles as $item)
+                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0">
+                        <label class="mt-auto mb-auto">
+                            {{ $item->name }}
+                        </label>
+                        <div>
                             <!-- edit -->
                             <a class="btn btn-sm btn-info" role="button">
-                               <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit"></i>
                             </a>
                             <!-- delete -->
                             <form class="d-inline" action="" method="POST">
-                               <button type="submit" class="btn btn-sm btn-danger">
-                                  <i class="fas fa-trash"></i>
-                               </button>
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
-                         </div>
-                      </li>
-                      <!-- list role -->
+                        </div>
+                    </li>
+                @empty
+                <p>
+                    <strong>
+                        {{ trans('roles.label.no_data.fetch')}}
+                    </strong>
+                </p>
+                   
+                @endforelse
+                <!-- list role -->
              </ul>
           </div>
        </div>
