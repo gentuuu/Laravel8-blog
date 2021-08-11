@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // use App\Models\Role;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -55,6 +57,28 @@ class RoleController extends Controller
         if ($validator->fails()){
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
+
+        DB::beginTransaction();
+        try {
+            $role = Role::create(['name' => $request->name]);
+            $role->givePermissionTo($request->permissions);
+            Alert::success(
+                trans('roles.alert.create.title'),
+                trans('roles.alert.create.message.success'),
+            );
+            return redirect()->route('roles.index');
+        } catch (\Throwable $th){
+            DB::rollBack();
+            Alert::success(
+                trans('roles.alert.create.title'),
+                trans('roles.alert.create.message.error', ['error' => $th->getMessage()]),
+                
+            );
+            return redirect()->back()->withInput($request->all());
+        } finally {
+            DB::commit();
+        }
+
     }
 
     /**
