@@ -88,6 +88,11 @@ Breadcrumbs::for('roles', function ($trail) {
     $trail->push('Roles', route('roles.index'));
 });
 
+Breadcrumbs::for('add_role', function ($trail) {
+    $trail->parent('roles');
+    $trail->push('Add', route('roles.create'));
+});
+
 
 Breadcrumbs::for('detail_role', function ($trail, $role) {
     $trail->parent('roles');
