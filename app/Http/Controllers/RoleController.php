@@ -120,7 +120,42 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => "required|string|max:50|unique:roles,name," . $role->id,
+                'permissions' => "required"
+            ],
+            [],
+            $this->attributes()
+        );
+
+        if ($validator->fails()){
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
+
+
+        DB::beginTransaction();
+        try {
+            $role->name = $request->name;
+            $role->syncPermissions($request->permissions);
+            $role->save();
+            Alert::success(
+                trans('roles.alert.update.title'),
+                trans('roles.alert.update.message.success'),
+            );
+            return redirect()->route('roles.index');
+        } catch (\Throwable $th){
+            DB::rollBack();
+            Alert::success(
+                trans('roles.alert.update.title'),
+                trans('roles.alert.update.message.error', ['error' => $th->getMessage()]),
+                
+            );
+            return redirect()->back()->withInput($request->all());
+        } finally {
+            DB::commit();
+        }
     }
 
     /**
