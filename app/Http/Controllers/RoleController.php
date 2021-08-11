@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    private $perPage = 10;
     /**
      * Display a listing of the resource.
      *
@@ -20,12 +22,12 @@ class RoleController extends Controller
     {
         $role = [];
         if($request->has('keyword')){
-            $roles = Role::where('name', 'LIKE', "%{$request->keyword}%")->get();
+            $roles = Role::where('name', 'LIKE', "%{$request->keyword}%")->paginate($this->perPage);
         } else {
-            $roles = Role::all();
+            $roles = Role::paginate($this->perPage);
         }
         return view('roles.index', [
-            'roles' => $roles
+            'roles' => $roles->appends(['keyword' => $request->keyword])
         ]);
     }
 
