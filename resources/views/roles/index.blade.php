@@ -52,7 +52,11 @@
                                 <i class="fas fa-edit"></i>
                             </a>
                             <!-- delete -->
-                            <form class="d-inline" action="" method="POST">
+                            <form class="d-inline" role="alert"
+                            alert-text="{{ trans('roles.alert.delete.message.confirm', ['name' => $item->name]) }}" 
+                            action="{{ route('roles.destroy', ['role'=> $item]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -74,3 +78,30 @@
     </div>
  </div>
 @endsection
+
+
+
+@push('javascript-internal')
+<script>
+    $(document).ready(function(){
+        $("form[role='alert']").submit(function(event){
+            event.preventDefault();
+            Swal.fire({
+            title: "{{trans('roles.alert.delete.title')}}",
+            text: $(this).attr('allert-text'),
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "{{trans('roles.button.cancel.value')}}",
+            reverseButtons: true,
+            confirmButtonText: "{{trans('roles.button.delete.value')}}",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+            });
+        });
+    });
+</script>
+    
+@endpush
