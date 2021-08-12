@@ -107,6 +107,12 @@ Breadcrumbs::for('edit_role', function ($trail, $role) {
 });
 
 
+Breadcrumbs::for('users', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('User', route('users.index'));
+});
+
+
 
 
 

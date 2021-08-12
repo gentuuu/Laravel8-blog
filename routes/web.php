@@ -38,11 +38,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], functio
     Route::resource('/tags', App\Http\Controllers\TagController::class)->except(['show']);
 
     Route::resource('/posts', App\Http\Controllers\PostController::class);
-    Route::resource('/posts', App\Http\PostController::class);
+
     Route::group(['prefix' => 'filemanager'], function () {
         Route::get('/index', [\App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
 
     Route::resource('/roles', App\Http\Controllers\RoleController::class);
+
+    Route::resource('/users', App\Http\Controllers\UserController::class);
 });
