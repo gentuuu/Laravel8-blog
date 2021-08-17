@@ -82,10 +82,14 @@
                                 <i class="fas fa-edit"></i>
                              </a>
                              <!-- delete -->
-                             <form action="" method="POST" role="alert" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                   <i class="fas fa-trash"></i>
-                                </button>
+                             <form class="d-inline" role="alert"
+                                 alert-text="{{ trans('users.alert.delete.message.confirm', ['name' => $item->name]) }}" 
+                                 action="{{ route('users.destroy', ['user'=> $item]) }}" method="POST">
+                                 @csrf
+                                 @method('DELETE')
+                                 <button type="submit" class="btn btn-sm btn-danger">
+                                     <i class="fas fa-trash"></i>
+                                 </button>
                              </form>
                           </div>
                        </div>
@@ -107,3 +111,29 @@
     </div>
  </div>
 @endsection
+
+
+@push('javascript-internal')
+<script>
+    $(document).ready(function(){
+        $("form[role='alert']").submit(function(event){
+            event.preventDefault();
+            Swal.fire({
+            title: "{{trans('users.alert.delete.title')}}",
+            text: $(this).attr('allert-text'),
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "{{trans('users.button.cancel.value')}}",
+            reverseButtons: true,
+            confirmButtonText: "{{trans('users.button.delete.value')}}",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+            });
+        });
+    });
+</script>
+    
+@endpush
