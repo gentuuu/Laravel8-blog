@@ -78,7 +78,7 @@
                           </div>
                           <div class="float-right">
                              <!-- edit -->
-                             <a href="{{ route('users.create') }}" class="btn btn-sm btn-info" role="button">
+                             <a href="{{ route('users.edit', ['user' => $item]) }}" class="btn btn-sm btn-info" role="button">
                                 <i class="fas fa-edit"></i>
                              </a>
                              <!-- delete -->

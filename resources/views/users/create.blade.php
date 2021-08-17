@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    
+   {{ trans('users.title.create') }}
 @endsection
 
 @section('breadcrumbs')
