@@ -20,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 //drugi sposób
 Route::get('/localization/{language}', [App\Http\Controllers\LocalizationController::class, 'switch'])->name('localization.switch');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.name');
 
 Auth::routes([
     'register' => false
