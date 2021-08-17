@@ -20,7 +20,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $role = [];
+        $roles = [];
         if($request->has('keyword')){
             $roles = Role::where('name', 'LIKE', "%{$request->keyword}%")->paginate($this->perPage);
         } else {

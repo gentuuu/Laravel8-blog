@@ -17,7 +17,7 @@
                 <div class="col-md-6">
                    <form action="" method="GET">
                       <div class="input-group">
-                         <input name="keyword" value="" type="search" class="form-control" placeholder="">
+                         <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="">
                          <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                <i class="fas fa-search"></i>
@@ -27,7 +27,7 @@
                    </form>
                 </div>
                 <div class="col-md-6">
-                   <a href="" class="btn btn-primary float-right" role="button">
+                   <a href="{{ route('users.create') }}" class="btn btn-primary float-right" role="button">
                       Create
                       <i class="fas fa-plus-square"></i>
                    </a>
@@ -98,7 +98,11 @@
                 @empty
                     <p>
                         <strong>
-                            {{ trans('users.label.no_data.fetch') }}
+                           @if (request()->get('keyword'))
+                              {{ trans('users.label.no_data.search', ['keyword' => request()->get('keyword')]) }}
+                           @else
+                              {{ trans('users.label.no_data.fetch') }}  
+                           @endif
                         </strong>
                     </p>
                 @endforelse
