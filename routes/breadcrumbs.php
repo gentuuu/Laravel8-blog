@@ -1,6 +1,17 @@
 <?php
 
-// Home
+// blog
+Breadcrumbs::for('blog', function ($trail) {
+    $trail->push('Blog', route('blog.home'));
+});
+
+Breadcrumbs::for('blog_home', function ($trail) {
+    $trail->parent('blog');
+    $trail->push('Home', route('blog.home'));
+});
+
+
+// admin
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push('Dashboard', route('dashboard.index'));
 });
