@@ -42,12 +42,14 @@
                {{trans('dashboard.link.users')}}
             </a>
          @endcan
-         <a class="nav-link {{ set_active(['roles.index', 'roles.create', 'roles.edit', 'roles.show' ]) }}" href="{{ route('roles.index') }}">
-            <div class="sb-nav-link-icon">
-               <i class="fas fa-user-shield"></i>
-            </div>
-            {{trans('dashboard.link.roles')}}
-         </a>
+         @can('manage_roles')
+            <a class="nav-link {{ set_active(['roles.index', 'roles.create', 'roles.edit', 'roles.show' ]) }}" href="{{ route('roles.index') }}">
+               <div class="sb-nav-link-icon">
+                  <i class="fas fa-user-shield"></i>
+               </div>
+               {{trans('dashboard.link.roles')}}
+            </a>
+         @endcan
          <div class="sb-sidenav-menu-heading">{{trans('dashboard.menu.setting')}}</div>
          <a class="nav-link {{ set_active(['filemanager.index' ]) }}" href="{{ route('filemanager.index') }}">
             <div class="sb-nav-link-icon">
