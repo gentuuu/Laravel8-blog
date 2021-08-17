@@ -34,12 +34,14 @@
             </a>
          @endcan
          <div class="sb-sidenav-menu-heading">{{trans('dashboard.menu.user_permission')}}</div>
-         <a class="nav-link {{ set_active(['users.index', 'users.create', 'users.edit', 'users.show' ]) }}" href="{{ route('users.index') }}">
-            <div class="sb-nav-link-icon">
-               <i class="fas fa-user"></i>
-            </div>
-            {{trans('dashboard.link.users')}}
-         </a>
+         @can('manage_users')
+            <a class="nav-link {{ set_active(['users.index', 'users.create', 'users.edit', 'users.show' ]) }}" href="{{ route('users.index') }}">
+               <div class="sb-nav-link-icon">
+                  <i class="fas fa-user"></i>
+               </div>
+               {{trans('dashboard.link.users')}}
+            </a>
+         @endcan
          <a class="nav-link {{ set_active(['roles.index', 'roles.create', 'roles.edit', 'roles.show' ]) }}" href="{{ route('roles.index') }}">
             <div class="sb-nav-link-icon">
                <i class="fas fa-user-shield"></i>

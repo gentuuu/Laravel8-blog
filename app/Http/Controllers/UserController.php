@@ -13,6 +13,16 @@ use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
 {
     private $perPage = 10;
+
+    public function __construct()
+    {
+        $this->middleware('permission:user_show', ['only' => 'index']);
+        $this->middleware('permission:user_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:user_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:user_detail', ['only' => 'show']);
+        $this->middleware('permission:user_delete', ['only' => 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
