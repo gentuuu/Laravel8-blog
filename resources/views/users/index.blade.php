@@ -108,9 +108,11 @@
                 @endforelse
              </div>
           </div>
-          <div class="card-footer">
-             <!-- Todo:paginate -->
-          </div>
+            @if ($users->hasPages())
+                <div class="card-footer">
+                    {{ $users->links('vendor.pagination.bootstrap-4') }}
+                </div>
+            @endif
        </div>
     </div>
  </div>
