@@ -8,13 +8,15 @@
             {{trans('dashboard.link.dashboard')}}
          </a>
          <div class="sb-sidenav-menu-heading">{{trans('dashboard.menu.master')}}</div>
-
-         <a class="nav-link {{ set_active(['posts.index', 'posts.create', 'posts.edit', 'posts.show' ]) }}" href="{{ route('posts.index') }}">
-            <div class="sb-nav-link-icon">
-               <i class="far fa-newspaper"></i>
-            </div>
-            {{trans('dashboard.link.posts')}}
-         </a>
+         @can('manage_posts')
+            <a class="nav-link {{ set_active(['posts.index', 'posts.create', 'posts.edit', 'posts.show' ]) }}" href="{{ route('posts.index') }}">
+               <div class="sb-nav-link-icon">
+                  <i class="far fa-newspaper"></i>
+               </div>
+               {{trans('dashboard.link.posts')}}
+            </a>
+         @endcan
+        
          <a class="nav-link {{ set_active(['categories.index', 'categories.create', 'categories.edit', 'categories.show' ]) }}" href="{{ route('categories.index') }}">
             <div class="sb-nav-link-icon">
                <i class="fas fa-bookmark"></i>
