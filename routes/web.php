@@ -24,7 +24,7 @@ Route::get('/localization/{language}', [App\Http\Controllers\LocalizationControl
 //     return view('welcome');
 // });
 
-Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.name');
+Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
 
 Auth::routes([
     'register' => false
