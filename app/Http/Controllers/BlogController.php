@@ -67,5 +67,16 @@ class BlogController extends Controller
         ]);
     }
 
+    public function showPostDetail($slug){
+        $post = Post::publish()->with(['categories', 'tags'])->where('slug', $slug)->first();
+        if (!$post){
+            return redirect()->route('blog.home');
+        }
+
+        return view('blog.post-detail',[
+            'post' => $post
+        ]);
+    }
+
  
 }

@@ -10,6 +10,11 @@ Breadcrumbs::for('blog_home', function ($trail) {
     $trail->push('Home', route('blog.home'));
 });
 
+Breadcrumbs::for('blog_post', function ($trail, $title) {
+    $trail->parent('blog');
+    $trail->push($title, '#');
+});
+
 Breadcrumbs::for('blog_categories', function ($trail) {
     $trail->parent('blog');
     $trail->push('Categories', route('blog.categories'));
