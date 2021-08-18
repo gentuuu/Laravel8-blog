@@ -26,6 +26,12 @@ Breadcrumbs::for('blog_tags', function ($trail) {
     $trail->push('Tags', route('blog.tags'));
 });
 
+Breadcrumbs::for('blog_posts_tag', function ($trail, $title) {
+    $trail->parent('blog');
+    $trail->push('Tags', route('blog.tags'));
+    $trail->push($title, '#');
+});
+
 Breadcrumbs::for('blog_search', function ($trail, $keyword) {
     $trail->parent('blog');
     $trail->push('Search', route('blog.search'));

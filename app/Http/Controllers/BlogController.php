@@ -53,5 +53,19 @@ class BlogController extends Controller
         ]);
     }
 
+    public function showPostsByTag($slug){
+        $posts = Post::publish()->whereHas('tags', function ($query) use ($slug) {
+            return $query->where('slug', $slug);
+        })->paginate($this->perpage);
+
+        $tag = Tag::where('slug', $slug)->first();
+        $tags = Tag::search($tag->title)->get();
+        return view('blog.posts-tag',[
+            'posts' => $posts,
+            'tag' => $tag,
+            'tags' => $tags
+        ]);
+    }
+
  
 }
