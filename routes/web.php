@@ -26,6 +26,7 @@ Route::get('/localization/{language}', [App\Http\Controllers\LocalizationControl
 
 Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
 Route::get('/categories', [\App\Http\Controllers\BlogController::class, 'showCategories'])->name('blog.categories');
+Route::get('/categories/{slug}', [\App\Http\Controllers\BlogController::class, 'showPostsByCategory'])->name('blog.posts.category');
 Route::get('/tags', [\App\Http\Controllers\BlogController::class, 'showTags'])->name('blog.tags');
 Route::get('/search', [\App\Http\Controllers\BlogController::class, 'searchPosts'])->name('blog.search');
 
