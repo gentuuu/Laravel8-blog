@@ -15,6 +15,10 @@ Breadcrumbs::for('blog_categories', function ($trail) {
     $trail->push('Categories', route('blog.categories'));
 });
 
+Breadcrumbs::for('blog_tags', function ($trail) {
+    $trail->parent('blog');
+    $trail->push('Tags', route('blog.tags'));
+});
 
 // admin
 Breadcrumbs::for('dashboard', function ($trail) {
