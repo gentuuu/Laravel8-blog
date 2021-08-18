@@ -31,4 +31,8 @@ class Category extends Model
     public function descendants(){
         return $this->children()->with('descendants');
     }
+
+    public function root(){
+        return $this->parent ? $this->parent->root() : $this;
+    }
 }

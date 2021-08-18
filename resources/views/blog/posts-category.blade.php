@@ -46,16 +46,26 @@
        <!-- Categories list:start -->
        <div class="card mb-1">
           <h5 class="card-header">
-             Categories
+             {{ trans('blog.widget.categories') }}
           </h5>
           <div class="card-body">
              <ul class="list-unstyled">
                 <li>
-                   <a href="">
-                      Category title
-                   </a>
+                    @if ($category->slug == $categoryRoot->slug)
+                        {{ $categoryRoot->title }}
+                    @else
+                        <a href="{{ route('blog.posts.category', ['slug' => $categoryRoot->slug]) }}">
+                            {{ $categoryRoot->title }}
+                        </a> 
+                    @endif
+                   
                    <!-- category descendants:start -->
- 
+                    @if ($categoryRoot->descendants)
+                        @include('blog.sub-categories', [
+                            'categoryRoot' => $categoryRoot->descendants,
+                            'category' => $category
+                        ])
+                    @endif
                    <!-- category descendants:end -->
                 </li>
              </ul>
