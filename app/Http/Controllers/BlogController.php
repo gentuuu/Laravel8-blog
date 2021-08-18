@@ -29,5 +29,15 @@ class BlogController extends Controller
         ]);
     }
 
+    public function searchPosts(Request $request){
+        if (!$request->get('keyword')){
+            return redirect()->route('blog.home');
+        }
+
+        return view('blog.search_post',[
+            'posts' => Post::search($request->keyword)->paginate($this->perpage)->appends(['keyword' => $request->keyword])
+        ]);
+    }
+
  
 }

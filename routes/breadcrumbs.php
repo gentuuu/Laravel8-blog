@@ -20,6 +20,13 @@ Breadcrumbs::for('blog_tags', function ($trail) {
     $trail->push('Tags', route('blog.tags'));
 });
 
+Breadcrumbs::for('blog_search', function ($trail, $keyword) {
+    $trail->parent('blog');
+    $trail->push('Search', route('blog.search'));
+    $trail->push($keyword, route('blog.search'));
+});
+
+
 // admin
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push('Dashboard', route('dashboard.index'));

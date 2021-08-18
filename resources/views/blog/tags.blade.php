@@ -20,7 +20,7 @@
             <a href="" class="badge badge-info py-3 px-5">#{{ $tag->title }}</a> 
            @empty
             <h3 class="text-center">
-                {{ trabs('blog_no_data.tags') }}
+                {{ trans('blog.no_data.tags') }}
             </h3>
 
            @endforelse     
